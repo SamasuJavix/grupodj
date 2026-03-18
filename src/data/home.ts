@@ -19,6 +19,16 @@ export const categories = [
         image: "https://i.ytimg.com/vi/6nF-4i3RrG0/hq720.jpg?sqp=-oaymwEXCK4FEIIDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLA1Ir1cXQna8UT0zPxI62l1ZlvvEQ",
         path: "/category/accesorios",
     },
+    {
+        name: "Monitores",
+        image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80",
+        path: "/category/monitores",
+    },
+    {
+        name: "Componentes",
+        image: "https://www.deltron.com.pe/modulos/productos/items/postsql/foto_1_31976.webp",
+        path: "/category/componentes",
+    },
 ];
 
 export const featuredLinks = [

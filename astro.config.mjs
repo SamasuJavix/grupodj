@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';;
+import vercel from '@astrojs/vercel/static'; 
 
 
 
@@ -18,6 +18,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  output: 'server', // Habilita el renderizado en el servidor
+  output: 'static', // Habilita el renderizado en el servidor
   adapter: vercel(),
 });
