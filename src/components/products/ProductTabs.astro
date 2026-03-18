@@ -1,0 +1,88 @@
+---
+import ProductSpecifications from "./ProductSpecifications.astro";
+
+interface Product {
+    description: string;
+    specs?: { label: string; value: string }[];
+}
+
+interface Props {
+    product: Product;
+}
+
+const { product } = Astro.props;
+---
+<div class="product-tabs w-full mt-20" id="product-tabs-container">
+    <!-- Tab Headers -->
+    <div class="border-b border-slate-200">
+        <nav class="-mb-px flex gap-x-8" aria-label="Tabs">
+            <button
+                class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-black text-lg uppercase tracking-wider border-primary text-primary"
+                aria-current="page"
+                data-tab="description"
+            >
+                Descripción
+            </button>
+            <button
+                class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-black text-lg uppercase tracking-wider border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300"
+                data-tab="specifications"
+            >
+                Ficha Técnica
+            </button>
+        </nav>
+    </div>
+
+    <!-- Tab Panels -->
+    <div class="py-10">
+        <!-- Description Panel -->
+        <div id="tab-panel-description" class="tab-panel">
+            <div class="prose prose-lg max-w-none text-slate-600 font-medium leading-relaxed">
+                <p>{product.description || "No hay descripción disponible para este producto."}</p>
+            </div>
+        </div>
+
+        <!-- Specifications Panel -->
+        <div id="tab-panel-specifications" class="tab-panel hidden">
+            <ProductSpecifications specs={product.specs} />
+        </div>
+    </div>
+</div>
+
+<script>
+    function setupTabs() {
+        const container = document.getElementById("product-tabs-container");
+        if (!container) return;
+
+        const tabButtons = container.querySelectorAll(".tab-btn");
+        const tabPanels = container.querySelectorAll(".tab-panel");
+
+        tabButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const tab = button.getAttribute("data-tab");
+
+                // Update button styles
+                tabButtons.forEach(btn => {
+                    btn.classList.remove("border-primary", "text-primary");
+                    btn.classList.add("border-transparent", "text-slate-500", "hover:text-slate-700", "hover:border-slate-300");
+                });
+                button.classList.add("border-primary", "text-primary");
+                button.classList.remove("border-transparent", "text-slate-500");
+
+                // Hide all panels
+                tabPanels.forEach(panel => {
+                    (panel as HTMLElement).classList.add("hidden");
+                });
+
+                // Show the active panel
+                const activePanel = container.querySelector(`#tab-panel-${tab}`);
+                if (activePanel) {
+                    (activePanel as HTMLElement).classList.remove("hidden");
+                }
+            });
+        });
+    }
+
+    // Run on initial page load and on view transitions
+    setupTabs();
+    document.addEventListener("astro:page-load", setupTabs);
+</script>

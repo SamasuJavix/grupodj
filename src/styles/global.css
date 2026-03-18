@@ -1,2 +1,81 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "javicho";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-primary: #1ba39c;
+  --color-primary-content: #ffffff;
+  --color-secondary: #00d2ff;
+  --color-secondary-content: #1a1a1a;
+  --color-accent: #1ba39c;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1a1a1a;
+  --color-neutral-content: #ffffff;
+  --color-base-100: #ffffff;
+  --color-base-200: #f8f9fa;
+  --color-base-300: #4a4a4a;
+  --color-base-content: #1a1a1a;
+  --color-info: #00d2ff;
+  --color-info-content: #1a1a1a;
+  --color-success: #1ba39c;
+  --color-success-content: #ffffff;
+  --color-warning: #ffbe33; /* Standard warning color */
+  --color-warning-content: #1a1a1a;
+  --color-error: #ff4d4d; /* Standard error color */
+  --color-error-content: #ffffff;
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.21875rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+.rounded-none {
+  border-radius: 0 !important;
+}
+
+.rounded {
+  border-radius: 0 !important;
+}
+
+.rounded-sm {
+  border-radius: 0 !important;
+}
+
+.rounded-md {
+  border-radius: 0 !important;
+}
+
+.rounded-lg {
+  border-radius: 0 !important;
+}
+
+.rounded-xl {
+  border-radius: 0 !important;
+}
+
+.rounded-2xl {
+  border-radius: 0 !important;
+}
+
+.rounded-3xl {
+  border-radius: 0 !important;
+}
+
+.rounded-full {
+  border-radius: 0 !important;
+}
+
+.rounded-box {
+  border-radius: 0 !important;
+}

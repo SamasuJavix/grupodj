@@ -1,0 +1,29 @@
+---
+interface Spec {
+    label: string;
+    value: string;
+}
+
+interface Props {
+    specs: Spec[];
+}
+
+const { specs = [] } = Astro.props;
+---
+
+<div class="product-specifications">
+    {
+        specs && specs.length > 0 ? (
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                {specs.map((spec) => (
+                    <div class="flex justify-between border-b border-slate-200 py-3">
+                        <p class="font-semibold text-slate-600">{spec.label}</p>
+                        <p class="font-bold text-slate-900 text-right">{spec.value}</p>
+                    </div>
+                ))}
+            </div>
+        ) : (
+            <p class="text-slate-500">No hay especificaciones técnicas disponibles para este producto.</p>
+        )
+    }
+</div>

@@ -1,100 +1,77 @@
 export const blogPosts = [
     {
         slug: "top-laptops-2024",
-        title: "Top 5 Laptops for Developers in 2024",
-        date: "January 15, 2024",
+        title: "Top 5 Laptops para Desarrolladores en 2024",
+        date: "15 de Enero, 2024",
         author: "Alex Tech",
         image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",
-        description: "Discover the best laptops for coding, compiling, and multitasking this year.",
+        description: "Descubre las mejores laptops para programar, compilar y realizar múltiples tareas este año.",
         content: `
-      <p>Choosing the right laptop for development can be a daunting task with so many options available in the market. In 2024, performance, battery life, and screen quality are more important than ever.</p>
+      <p>Elegir la laptop adecuada para el desarrollo puede ser una tarea abrumadora con tantas opciones disponibles en el mercado. En 2024, el rendimiento, la duración de la batería y la calidad de la pantalla son más importantes que nunca.</p>
       <h3>1. MacBook Pro 16 M3 Max</h3>
-      <p>The ultimate powerhouse for any developer. With the new M3 Max chip, compilation times are drastically reduced.</p>
+      <p>La máxima potencia para cualquier desarrollador. Con el nuevo chip M3 Max, los tiempos de compilación se reducen drásticamente.</p>
       <h3>2. Dell XPS 15</h3>
-      <p>A great Windows alternative with a stunning OLED display and robust performance.</p>
-      <p>Stay tuned for more in-depth reviews!</p>
+      <p>Una excelente alternativa con Windows, con una impresionante pantalla OLED y un rendimiento robusto.</p>
+      <p>¡Mantente atento para más reseñas a fondo!</p>
     `
     },
     {
         slug: "future-of-audio",
-        title: "The Future of High-Fidelity Audio",
-        date: "January 10, 2024",
-        author: "Sarah Sound",
+        title: "El Futuro del Audio de Alta Fidelidad",
+        date: "10 de Enero, 2024",
+        author: "Sara Sonido",
         image: "https://images.unsplash.com/photo-1558403194-611308249627?auto=format&fit=crop&w=800&q=80",
-        description: "How wireless technology is finally catching up to audiophile standards.",
+        description: "Cómo la tecnología inalámbrica finalmente está alcanzando los estándares de los audiófilos.",
         content: `
-      <p>Audiophiles have long preferred wired connections for the purest sound quality. However, recent advancements in Bluetooth codecs like LDAC and aptX Lossless are bridging the gap.</p>
-      <p>We explore the latest headphones that are changing the game.</p>
+      <p>Los audiófilos han preferido durante mucho tiempo las conexiones por cable para obtener la calidad de sonido más pura. Sin embargo, los avances recientes en códecs de Bluetooth como LDAC y aptX Lossless están cerrando la brecha.</p>
+      <p>Exploramos los últimos audífonos que están cambiando el juego.</p>
     `
     },
     {
         slug: "smartphone-photography",
-        title: "Mastering Smartphone Photography",
-        date: "January 5, 2024",
-        author: "Mike Lens",
+        title: "Dominando la Fotografía con Smartphones",
+        date: "5 de Enero, 2024",
+        author: "Miguel Lente",
         image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80",
-        description: "Tips and tricks to take professional-grade photos with your phone.",
+        description: "Consejos y trucos para tomar fotos de calidad profesional con tu teléfono.",
         content: `
-      <p>You don't need a DSLR to take amazing photos. Modern smartphones come equipped with powerful sensors and AI processing.</p>
-      <p>Learn about composition, lighting, and how to use pro mode effectively.</p>
+      <p>No necesitas una DSLR para tomar fotos increíbles. Los smartphones modernos vienen equipados con potentes sensores y procesamiento de IA.</p>
+      <p>Aprende sobre composición, iluminación y cómo usar el modo profesional de manera efectiva.</p>
     `
     },
     {
         slug: "mechanical-keyboards",
-        title: "Why You Need a Mechanical Keyboard",
-        date: "December 28, 2023",
-        author: "Key Master",
+        title: "Por Qué Necesitas un Teclado Mecánico",
+        date: "28 de Diciembre, 2023",
+        author: "Maestro Teclas",
         image: "https://d1q3zw97enxzq2.cloudfront.net/images/K65_PLUS_WIRELESS_14_2.width-1000.format-webp.webp",
-        description: "The benefits of tactile feedback and customization for your daily workflow.",
+        description: "Los beneficios de la retroalimentación táctil y la personalización para tu flujo de trabajo diario.",
         content: `
-      <p>Once you go mechanical, you never go back. The tactile feedback not only feels great but can also improve your typing speed and accuracy.</p>
-      <p>We break down the different switch colors and what they mean for you.</p>
+      <p>Una vez que pruebas un teclado mecánico, no hay vuelta atrás. La retroalimentación táctil no solo se siente genial, sino que también puede mejorar tu velocidad y precisión al escribir.</p>
+      <p>Analizamos los diferentes colores de interruptores y lo que significan para ti.</p>
     `
     },
     {
         slug: "gaming-monitors",
-        title: "Best Gaming Monitors Under $500",
-        date: "December 15, 2023",
+        title: "Mejores Monitores Gaming por Menos de S/ 2000",
+        date: "15 de Diciembre, 2023",
         author: "Gamer Pro",
         image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80",
-        description: "High refresh rates and low response times without breaking the bank.",
+        description: "Altas tasas de refresco y bajos tiempos de respuesta sin gastar una fortuna.",
         content: `
-      <p>You don't have to spend a fortune to get a competitive edge. We've rounded up the best budget-friendly gaming monitors.</p>
-      <p>Look for IPS panels with at least 144Hz refresh rate.</p>
+      <p>No tienes que gastar una fortuna para obtener una ventaja competitiva. Hemos recopilado los mejores monitores para juegos económicos.</p>
+      <p>Busca paneles IPS con al menos 144Hz de tasa de refresco.</p>
     `
     },
     {
         slug: "tech-trends-2024",
-        title: "Emerging Tech Trends in 2024",
-        date: "January 20, 2024",
-        author: "Tech Visionary",
+        title: "Tendencias Tecnológicas Emergentes en 2024",
+        date: "20 de Enero, 2024",
+        author: "Visionario Tech",
         image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-        description: "What to expect in the world of technology this coming year.",
+        description: "Qué esperar en el mundo de la tecnología este próximo año.",
         content: `
-      <p>From AI integration in everything to sustainable tech solutions, 2024 promises to be an exciting year.</p>
-    `
-    },
-    {
-        slug: "gaming-monitors",
-        title: "Best Gaming Monitors Under $500",
-        date: "December 15, 2023",
-        author: "Gamer Pro",
-        image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80",
-        description: "High refresh rates and low response times without breaking the bank.",
-        content: `
-      <p>You don't have to spend a fortune to get a competitive edge. We've rounded up the best budget-friendly gaming monitors.</p>
-      <p>Look for IPS panels with at least 144Hz refresh rate.</p>
-    `
-    },
-    {
-        slug: "tech-trends-2024",
-        title: "Emerging Tech Trends in 2024",
-        date: "January 20, 2024",
-        author: "Tech Visionary",
-        image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-        description: "What to expect in the world of technology this coming year.",
-        content: `
-      <p>From AI integration in everything to sustainable tech solutions, 2024 promises to be an exciting year.</p>
+      <p>Desde la integración de la IA en todo hasta soluciones tecnológicas sostenibles, 2024 promete ser un año emocionante.</p>
     `
     }
 ];

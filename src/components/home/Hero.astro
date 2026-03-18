@@ -10,29 +10,28 @@ import { Icon } from "astro-icon/components";
             <div class="swiper-slide relative">
                 <img
                     src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1920&auto=format&fit=crop"
-                    alt="Luxury Laptops"
+                    alt="Laptops de Lujo"
                     class="absolute inset-0 w-full h-full object-cover"
                 />
                 <div
                     class="absolute inset-0 bg-black/40 flex items-center justify-center text-center px-4"
                 >
-                    <div class="max-w-3xl animate-fade-in">
+                    <div class="max-w-3xl">
                         <h2
                             class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight"
                         >
-                            Next-Gen Performance
+                            Rendimiento de Nueva Generación
                         </h2>
                         <p
                             class="text-lg md:text-xl text-white/90 mb-8 max-w-xl mx-auto"
                         >
-                            Discover our new collection of high-performance
-                            laptops designed for creators and professionals.
+                            Descubre nuestra nueva colección de laptops de alto rendimiento diseñadas para creadores y profesionales.
                         </p>
                         <a
-                            href="/shop/laptops"
+                            href="/category/computo?sub=laptops"
                             class="btn btn-primary btn-lg rounded-full px-8 shadow-xl hover:scale-105 transition-transform"
                         >
-                            Shop Laptops
+                            Comprar Laptops
                         </a>
                     </div>
                 </div>
@@ -42,7 +41,7 @@ import { Icon } from "astro-icon/components";
             <div class="swiper-slide relative">
                 <img
                     src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1920&auto=format&fit=crop"
-                    alt="Modern Smartphones"
+                    alt="Smartphones Modernos"
                     class="absolute inset-0 w-full h-full object-cover"
                 />
                 <div
@@ -51,23 +50,21 @@ import { Icon } from "astro-icon/components";
                     <div class="max-w-2xl text-left">
                         <span
                             class="badge badge-primary mb-4 p-4 font-bold uppercase tracking-widest"
-                            >New Arrival</span
+                            >Nuevos Ingresos</span
                         >
                         <h2
                             class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight"
                         >
-                            Smart Connections
+                            Conexiones Inteligentes
                         </h2>
                         <p class="text-lg md:text-xl text-white/90 mb-8">
-                            Stay ahead with the latest mobile technology.
-                            Experience power and elegance in the palm of your
-                            hand.
+                            Mantente a la vanguardia con la última tecnología móvil. Experimenta potencia y elegancia en la palma de tu mano.
                         </p>
                         <a
-                            href="/shop/phones"
+                            href="/category/celulares"
                             class="btn btn-secondary btn-lg rounded-full px-8 shadow-xl hover:scale-105 transition-transform"
                         >
-                            Explore Phones
+                            Explorar Celulares
                         </a>
                     </div>
                 </div>
@@ -77,7 +74,7 @@ import { Icon } from "astro-icon/components";
             <div class="swiper-slide relative">
                 <img
                     src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920&auto=format&fit=crop"
-                    alt="Gaming Gear"
+                    alt="Equipos de Gaming"
                     class="absolute inset-0 w-full h-full object-cover"
                 />
                 <div
@@ -87,26 +84,25 @@ import { Icon } from "astro-icon/components";
                         <h2
                             class="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight"
                         >
-                            Level Up Your Game
+                            Sube de Nivel tu Juego
                         </h2>
                         <p
                             class="text-lg md:text-xl text-white/90 mb-8 max-w-xl mx-auto"
                         >
-                            Immerse yourself in the ultimate gaming experience
-                            with our pro-level gear and custom setups.
+                            Sumérgete en la mejor experiencia de gaming con nuestros equipos de nivel profesional y configuraciones personalizadas.
                         </p>
                         <div class="flex flex-wrap justify-center gap-4">
                             <a
-                                href="/shop/gaming"
+                                href="/category/componentes"
                                 class="btn btn-primary btn-lg rounded-full px-8 shadow-xl hover:shadow-primary/20 transition-all"
                             >
-                                Get the Gear
+                                Ver Componentes
                             </a>
                             <a
-                                href="/shop/accessories"
+                                href="/category/accesorios"
                                 class="btn btn-outline btn-white btn-lg rounded-full px-8 text-white hover:bg-white hover:text-black transition-all"
                             >
-                                Accessories
+                                Accesorios
                             </a>
                         </div>
                     </div>
@@ -152,21 +148,6 @@ import { Icon } from "astro-icon/components";
         border-radius: 5px;
         transition: width 0.3s ease;
     }
-
-    @keyframes fade-in {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .animate-fade-in {
-        animation: fade-in 1s ease-out forwards;
-    }
 </style>
 
 <script>
@@ -175,14 +156,13 @@ import { Icon } from "astro-icon/components";
         Navigation,
         Pagination,
         Autoplay,
-        EffectFade,
     } from "swiper/modules";
 
     const initHeroSwiper = () => {
         new Swiper(".hero-swiper", {
-            modules: [Navigation, Pagination, Autoplay, EffectFade],
+            modules: [Navigation, Pagination, Autoplay],
             loop: true,
-            effect: "fade",
+            speed: 800,
             autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,

@@ -1,0 +1,21 @@
+---
+interface Props {
+  productName: string;
+  phoneNumber: string;
+}
+
+const { productName, phoneNumber } = Astro.props;
+const message = `Hola, estoy interesado en cotizar el producto: ${productName}`;
+const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+  message
+)}`;
+---
+
+<a
+  href={whatsappUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="inline-block px-6 py-3 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+>
+  Cotizar por WhatsApp
+</a>

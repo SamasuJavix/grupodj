@@ -1,13 +1,13 @@
 export const categories = [
     {
-        name: "Computers",
+        name: "Computo",
         image: "https://images.unsplash.com/photo-1547082299-de196ea013d6?q=80&w=2000&auto=format&fit=crop",
-        path: "/category/computers",
+        path: "/category/computo",
     },
     {
-        name: "Phones",
+        name: "Celulares",
         image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=2000&auto=format&fit=crop",
-        path: "/category/phones",
+        path: "/category/celulares",
     },
     {
         name: "Audio",
@@ -15,15 +15,15 @@ export const categories = [
         path: "/category/audio",
     },
     {
-        name: "Accessories",
+        name: "Accesorios",
         image: "https://i.ytimg.com/vi/6nF-4i3RrG0/hq720.jpg?sqp=-oaymwEXCK4FEIIDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLA1Ir1cXQna8UT0zPxI62l1ZlvvEQ",
-        path: "/category/accessories",
+        path: "/category/accesorios",
     },
 ];
 
 export const featuredLinks = [
     {
-        name: "About Us",
+        name: "Nosotros",
         image:
             "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
         path: "/about",
@@ -31,7 +31,7 @@ export const featuredLinks = [
         imageClass: "aspect-square lg:aspect-[2/1]",
     },
     {
-        name: "Our Blog",
+        name: "Nuestro Blog",
         image:
             "https://img.freepik.com/foto-gratis/mensaje-online-blog-chat-comunicacion-envolver-concepto-icono-grafico_53876-139717.jpg?semt=ais_hybrid&w=740&q=80",
         path: "/blog",
@@ -39,7 +39,7 @@ export const featuredLinks = [
         imageClass: "aspect-square lg:aspect-[2/1]",
     },
     {
-        name: "Contact Us",
+        name: "Contáctanos",
         image:
             "https://voca-land.sgp1.cdn.digitaloceanspaces.com/-1/1635919600965/contact-us.jpeg",
         path: "/contact",
