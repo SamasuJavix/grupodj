@@ -98,6 +98,8 @@ const { title, price, images, stock, slug } = Astro.props;
     </div>
 
     <!-- Info -->
+
+
     <div class="p-4">
         <h3 class="font-bold text-lg mb-1 truncate" title={title}>
             <a
@@ -108,13 +110,21 @@ const { title, price, images, stock, slug } = Astro.props;
             </a>
         </h3>
 
-        <div class="flex items-center justify-between mt-2">
-            <span class="text-xl font-bold text-primary">
+        <div class="flex items-center justify-between mt-2" >
+           
+           
+           
+           <!-- Price-->
+           
+            <!-- <span class="text-xl font-bold text-primary" style="visibility: hidden;">
                 {price.toLocaleString("es-PE", {
                     style: "currency",
                     currency: "PEN",
                 })}
-            </span>
+            </span> -->
+
+
+
             <div class="flex items-center gap-1 text-xs font-medium">
                 {
                     stock > 0 ? (

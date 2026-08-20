@@ -546,7 +546,154 @@ export const products: Product[] = [
             { label: "Vel. Lectura", value: "Hasta 7,000 MB/s" },
             { label: "Formato", value: "M.2 2280" }
         ]
+    },
+    {
+        id: "28",
+        name: "Lenovo V15 G4 IRU",
+        title: "Laptop Lenovo V15 G4 IRU Core i3 15.6\" FHD 8GB 256GB SSD",
+        price: 1599,
+        description: "La Lenovo V15 G4 IRU es una notebook confiable y eficiente, diseñada para la productividad diaria. Equipada con un procesador Intel Core i3 de 13ª generación, 8GB de RAM DDR4 y un rápido almacenamiento SSD de 256GB, ofrece un rendimiento sólido para tareas de oficina y multimedia. Su pantalla de 15.6 pulgadas Full HD con tecnología anti-reflejo y certificaciones de baja luz azul cuida tu vista durante largas jornadas. Con un diseño robusto que cumple con estándares militares MIL-STD-810H y un obturador de privacidad para la cámara web, es una opción segura y duradera.",
+        category: "Computo",
+        subcategory: "laptops",
+        stock: 20,
+        images: [
+            "/images/products/LENOVO-V14-IRU-1.jpg",
+            "/images/products/LENOVO-V14-IRU-2.jpg",
+            "/images/products/LENOVO-V14-IRU-3.jpg",
+        ],
+        slug: "lenovo-v15-g4-iru-i3",
+        badge: "Productividad",
+        specs: [
+            { label: "Procesador", value: "Intel Core i3-1315U" },
+            { label: "Memoria RAM", value: "8GB DDR4 3200MHz" },
+            { label: "Almacenamiento", value: "256GB SSD M.2 NVMe" },
+            { label: "Pantalla", value: "15.6\" FHD (1920x1080) TN" },
+            { label: "Gráficos", value: "Intel UHD Graphics" },
+            { label: "Sistema Operativo", value: "No incluido" }
+        ]
+    },
+    {
+        id: "29",
+        name: "Parlante Bluetooth Teros TE-6045N",
+        title: "Parlante Bluetooth Teros TE-6045N 60W con Luz LED",
+        price: 249,
+        description: "Disfruta de un sonido potente con el parlante Bluetooth Teros TE-6045N. Con 60W de potencia, luces LED, y resistencia al agua IPX5, es perfecto para cualquier ocasión. Ofrece múltiples opciones de reproducción como Radio FM, USB, tarjeta TF y entrada auxiliar. Además, cuenta con tecnología TWS para audio dual, micrófono integrado y una batería de 3600 mAh.",
+        category: "Audio",
+        subcategory: "parlantes",
+        stock: 25,
+        images: [
+            "/images/products/MMSPTE6045N-600x600.jpg",
+            "/images/products/MMSPTE6045N_2-600x600.jpg",
+            "/images/products/MMSPTE6045N_5-600x600.jpg"
+
+        ],
+        slug: "parlante-teros-te-6045n",
+        badge: "Nuevo",
+        specs: [
+            { label: "Potencia", value: "60W" },
+            { label: "Resistencia", value: "IPX5 (Agua)" },
+            { label: "Conectividad", value: "Bluetooth, USB, TF, AUX" },
+            { label: "Batería", value: "3600 mAh" },
+            { label: "Funciones", value: "Radio FM, TWS, Micrófono" },
+            { label: "Dimensiones", value: "39.7 x 17.3 x 21.7 cm" }
+        ]
+    },
+    {
+        id: "30",
+        name: "Monitor Teros TE-2128S 21.5\"",
+        title: "Monitor Teros TE-2128S 21.5\" FHD IPS 100Hz",
+        price: 399,
+        description: "El monitor Teros TE-2128S de 21.5 pulgadas ofrece una experiencia visual fluida y nítida gracias a su panel IPS con resolución Full HD, una tasa de refresco de 100Hz y un tiempo de respuesta de 1ms. Ideal para oficina y uso general, cuenta con tecnologías como FreeSync, Low Blue Light y Flicker Free para cuidar tu vista. Incluye puertos HDMI y VGA, y es compatible con montaje VESA.",
+        category: "Monitores",
+        stock: 30,
+        images: [
+            "/images/products/monitor-teros-te-2128s.jpeg"
+        ],
+        slug: "monitor-teros-te-2128s",
+        badge: "Nuevo",
+        specs: [
+            { label: "Tamaño", value: "21.5 pulgadas" },
+            { label: "Resolución", value: "1920x1080 (FHD)" },
+            { label: "Panel", value: "IPS" },
+            { label: "Tasa de Refresco", value: "100Hz" },
+            { label: "Tiempo de Respuesta", value: "1ms" },
+            { label: "Puertos", value: "1x HDMI 1.4, 1x VGA" },
+            { label: "VESA", value: "75x75mm" }
+        ]
+    },
+    {
+        id: "31",
+        name: "Mochila Teros TE-9046BG 15.6\"",
+        title: "Mochila Teros TE-9046BG para Laptop 15.6\" Beige",
+        price: 129,
+        description: "La mochila Teros TE-9046BG es la compañera ideal para tu laptop de hasta 15.6 pulgadas. Fabricada en poliéster resistente, ofrece un compartimento principal de gran volumen y un compartimento acolchado individual para tu portátil. Cuenta con múltiples bolsillos, incluyendo dos frontales de acceso rápido, un bolsillo secreto trasero, y bolsillos laterales. Además, incorpora un puerto de carga USB para que nunca te quedes sin batería y una correa para carrito para facilitar tus viajes.",
+        category: "Accesorios",
+        subcategory: "mochilas",
+        stock: 40,
+        images: [
+            "/images/products/mochila-teros-te-9046bg.webp"
+        ],
+        slug: "mochila-teros-te-9046bg",
+        badge: "Funcional",
+        specs: [
+            { label: "Compatibilidad", value: "Laptops hasta 15.6\"" },
+            { label: "Material", value: "Poliéster" },
+            { label: "Puerto USB", value: "Sí, de carga" },
+            { label: "Dimensiones", value: "28 x 14.5 x 41 cm" },
+            { label: "Color", value: "Beige" },
+            { label: "Bolsillos", value: "Frontales, secreto, lateral" }
+        ]
+    },
+    {
+        id: "32",
+        name: "Mouse Inalámbrico Teros TE-1234S",
+        title: "Mouse Inalámbrico Teros TE-1234S Rosado",
+        price: 49,
+        description: "El mouse inalámbrico Teros TE-1234S en color rosado es perfecto para el uso diario. Con un sensor óptico, 6 botones y DPI ajustable (800/1200/1600), ofrece precisión y comodidad. Su conexión inalámbrica de 2.4 GHz tiene un alcance de hasta 10 metros y funciona con una sola pila AA.",
+        category: "Accesorios",
+        subcategory: "mouse",
+        stock: 50,
+        images: [
+            "https://www.impacto.com.pe/storage/products/1698351500_1.webp"
+        ],
+        slug: "mouse-inalambrico-teros-te-1234s",
+        badge: "Nuevo",
+        specs: [
+            { label: "Tipo", value: "Inalámbrico 2.4 GHz" },
+            { label: "Sensor", value: "Óptico" },
+            { label: "DPI", value: "800/1200/1600" },
+            { label: "Botones", value: "6" },
+            { label: "Alcance", value: "Hasta 10 metros" },
+            { label: "Batería", value: "1 x AA" }
+        ]
+    },
+    {
+        id: "33",
+        name: "All-in-One Lenovo A100 23.8\"",
+        title: "All-in-One Lenovo A100 23.8\" FHD Celeron N100 8GB 512GB SSD",
+        price: 1899,
+        description: "La Lenovo A100 es una solución todo en uno elegante y eficiente, perfecta para el hogar o la oficina. Con una pantalla FHD de 23.8 pulgadas, un procesador Intel Celeron N100, 8GB de RAM y un rápido SSD de 512GB, está lista para tus tareas diarias. Incluye teclado y mouse en español, Wi-Fi 6, y una cámara web HD integrada, ofreciendo una experiencia completa y ordenada sin necesidad de una torre.",
+        category: "Computo",
+        subcategory: "all-in-one",
+        stock: 15,
+        images: [
+            "/images/products/LENOVO-AIO-A100-1.jpg",
+            "/images/products/LENOVO-AIO-A100-2.jpg",
+            "/images/products/LENOVO-AIO-A100-3.jpg"
+        ],
+        slug: "lenovo-aio-a100-n100",
+        badge: "Todo en Uno",
+        specs: [
+            { label: "Procesador", value: "Intel Celeron N100" },
+            { label: "Memoria RAM", value: "8GB DDR4 3200MHz" },
+            { label: "Almacenamiento", value: "512GB SSD M.2 NVMe" },
+            { label: "Pantalla", value: "23.8\" FHD (1920x1080) IPS" },
+            { label: "Conectividad", value: "Wi-Fi 6, Bluetooth 5.2" },
+            { label: "Incluye", value: "Teclado y Mouse USB (Español)" },
+            { label: "Sistema Operativo", value: "No incluido" }
+        ]
     }
+    
 ];
 
 export const getProductBySlug = (slug: string) => products.find(p => p.slug === slug);

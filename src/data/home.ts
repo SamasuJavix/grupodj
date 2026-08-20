@@ -23,12 +23,15 @@ export const categories = [
         name: "Monitores",
         image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80",
         path: "/category/monitores",
-    },
-    {
-        name: "Componentes",
-        image: "https://www.deltron.com.pe/modulos/productos/items/postsql/foto_1_31976.webp",
-        path: "/category/componentes",
-    },
+    }
+    // La categoria componentes esta deshabilitada temporalmente : Actualmente no se cuenta con dicho stock
+    // ,
+    // {
+        
+    //     name: "Componentes",
+    //     image: "https://www.deltron.com.pe/modulos/productos/items/postsql/foto_1_31976.webp",
+    //     path: "/category/componentes",
+    // },
 ];
 
 export const featuredLinks = [
