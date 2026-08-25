@@ -3,12 +3,7 @@ import AdminLayout from "../../../../layouts/AdminLayout.astro";
 import { Icon } from "astro-icon/components";
 import prisma from "../../../../lib/prisma";
 
-export async function getStaticPaths() {
-	const products = await prisma.product.findMany({ select: { id: true } });
-	return products.map((p) => ({
-		params: { id: p.id },
-	}));
-}
+export const prerender = false;
 
 const { id } = Astro.params;
 

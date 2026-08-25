@@ -6,27 +6,7 @@ import CardProduct from "../../components/products/CardProduct.astro";
 import { getAllProducts } from "../../lib/db";
 import { categories } from "../../data/home";
 
-export async function getStaticPaths() {
-    const products = await getAllProducts();
-    const uniqueCategories = [...new Set(products.map((p) => p.category))];
 
-    return uniqueCategories.map((category) => {
-        const categoryData = categories.find(
-            (c) => c.name.toLowerCase() === category.toLowerCase(),
-        );
-        const categorySlug = category.toLowerCase();
-        return {
-            params: { category: categorySlug },
-            props: {
-                categoryName: category,
-                categoryProducts: products.filter(
-                    (p) => p.category.toLowerCase() === category.toLowerCase(),
-                ),
-                image: categoryData?.image,
-            },
-        };
-    });
-}
 
 let { categoryName, categoryProducts, image } = Astro.props;
 const categorySlug = Astro.params.category || "";

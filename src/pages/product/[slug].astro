@@ -7,13 +7,7 @@ import ProductTabs from "../../components/products/ProductTabs.astro";
 import CardProduct from "../../components/products/CardProduct.astro";
 import { getAllProducts, getProductBySlug, getRelatedProducts } from "../../lib/db";
 
-export async function getStaticPaths() {
-    const products = await getAllProducts();
-    return products.map((product) => ({
-        params: { slug: product.slug },
-        props: { product },
-    }));
-}
+
 
 const slug = Astro.params.slug || "";
 let { product } = Astro.props;
