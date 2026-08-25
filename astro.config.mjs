@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel'; 
+import node from '@astrojs/node';
 
 
 
@@ -18,6 +18,8 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  output: 'server', // Habilita renderizado dinámico en servidor y endpoints API con adaptador Vercel
-  adapter: vercel(),
+  output: 'server', // Habilita renderizado dinámico en servidor para Hostinger
+  adapter: node({
+    mode: 'standalone'
+  }),
 });
