@@ -11,7 +11,7 @@
     "db:push": "npx prisma db push",
     "db:studio": "npx prisma studio",
     "db:seed": "npx tsx src/scripts/seed.ts",
-    "start": "node dist/server/entry.mjs",
+    "start": "node server.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {
