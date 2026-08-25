@@ -377,6 +377,7 @@ const specsList = (product.specs as any[]) || [];
 
 	<script>
 		import { toast } from "sonner";
+		import Swal from "sweetalert2";
 
 		const form = document.getElementById(
 			"edit-product-form",
@@ -571,16 +572,31 @@ const specsList = (product.specs as any[]) || [];
 				const data = await response.json();
 
 				if (response.ok && data.success) {
-					toast.success("¡Producto actualizado en MySQL!");
-					setTimeout(() => {
+					Swal.fire({
+						icon: "success",
+						title: "¡Producto actualizado!",
+						text: "Redirigiendo al panel...",
+						timer: 1500,
+						showConfirmButton: false
+					}).then(() => {
 						window.location.href = "/admin/productos";
-					}, 800);
+					});
 				} else {
-					toast.error(data.message || "Error al actualizar");
+					Swal.fire({
+						icon: "error",
+						title: "Error",
+						text: data.message || "Error al actualizar",
+						confirmButtonColor: "#4f46e5"
+					});
 				}
 			} catch (error) {
 				console.error("Error al actualizar producto:", error);
-				toast.error("Error de conexión");
+				Swal.fire({
+					icon: "error",
+					title: "Error de conexión",
+					text: "No se pudo conectar con el servidor",
+					confirmButtonColor: "#4f46e5"
+				});
 			}
 		});
 	</script>
