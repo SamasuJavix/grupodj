@@ -12,6 +12,9 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
+  security: {
+    checkOrigin: false
+  },
   integrations: [react(), icon()],
 
   vite: {
