@@ -10,10 +10,19 @@ export async function getStaticPaths() {
   }));
 }
 
-const { post } = Astro.props;
+const slug = Astro.params.slug || "";
+let { post } = Astro.props;
+
+if (!post) {
+  post = blogPosts.find((p) => p.slug === slug);
+}
+
+if (!post) {
+  return Astro.redirect("/blog");
+}
 
 // Filter related articles
-const relatedPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
+const relatedPosts = (blogPosts || []).filter((p) => p.slug !== post.slug).slice(0, 2);
 ---
 
 <Layout>

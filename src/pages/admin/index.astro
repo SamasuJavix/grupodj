@@ -1,0 +1,316 @@
+---
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { Icon } from "astro-icon/components";
+import prisma from "../../lib/prisma";
+
+export const prerender = false;
+
+// Consultas a MySQL (Hostinger) en tiempo real
+const totalProducts = await prisma.product.count();
+const activeProducts = await prisma.product.count({
+	where: { isActive: true },
+});
+const lowStockProducts = await prisma.product.count({
+	where: { stock: { lte: 5 } },
+});
+const totalCategories = await prisma.category.count();
+
+const recentProducts = await prisma.product.findMany({
+	take: 5,
+	orderBy: { createdAt: "desc" },
+	include: { category: true, images: { take: 1 } },
+});
+---
+
+<AdminLayout title="Dashboard | Admin Grupo DJ">
+	<div class="space-y-8">
+		<!-- Welcome Header -->
+		<div
+			class="bg-primary-content border border-base-300 rounded-3xl p-6 space-y-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+		>
+			<div class="space-y-2">
+				<span
+					class="text-xs font-bold uppercase tracking-widest text-primary italic"
+					>Panel de Control General</span
+				>
+				<h2
+					class="text-3xl md:text-4xl font-black uppercase text-base-content tracking-tight italic"
+				>
+					Bienvenido al Administrador
+				</h2>
+				<p class="text-base-content/70 text-sm font-medium">
+					Gestiona tu catálogo de productos, inventario y ventas
+					alojados en Hostinger MySQL.
+				</p>
+			</div>
+
+			<div class="flex gap-3 shrink-0">
+				<a
+					href="/admin/productos/nuevo"
+					class="bg-primary hover:bg-primary/90 text-base-content font-black py-3 px-6 rounded-xl uppercase text-xs tracking-wider shadow-lg shadow-primary/20 flex items-center gap-2"
+				>
+					<Icon name="lucide:plus" class="w-4 h-4" />
+					Nuevo Producto
+				</a>
+			</div>
+		</div>
+
+		<!-- Metrics Grid -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+			<!-- Total Products -->
+			<div
+				class="bg-primary p-6 rounded-2xl space-y-4 shadow-md shadow-primary/20"
+			>
+				<div
+					class="flex justify-between items-center text-primary-content/80"
+				>
+					<span class="text-xs font-bold uppercase tracking-wider"
+						>Total Productos</span
+					>
+					<div
+						class="w-10 h-10 bg-primary-content/20 text-primary-content rounded-xl flex items-center justify-center"
+					>
+						<Icon name="lucide:package" class="w-5 h-5" />
+					</div>
+				</div>
+				<div class="text-4xl font-black text-primary-content">
+					{totalProducts}
+				</div>
+				<p class="text-xs text-primary-content/70 font-medium">
+					Registrados en la base de datos
+				</p>
+			</div>
+
+			<!-- Active Products -->
+			<div
+				class="bg-base-100 border border-base-300 p-6 rounded-2xl space-y-4"
+			>
+				<div
+					class="flex justify-between items-center text-base-content/70"
+				>
+					<span class="text-xs font-bold uppercase tracking-wider"
+						>Visibles en Tienda</span
+					>
+					<div
+						class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center"
+					>
+						<Icon name="lucide:eye" class="w-5 h-5" />
+					</div>
+				</div>
+				<div class="text-4xl font-black text-emerald-600">
+					{activeProducts}
+				</div>
+				<p class="text-xs text-base-content/50 font-medium">
+					Productos en estado activo
+				</p>
+			</div>
+
+			<!-- Low Stock Alert -->
+			<div
+				class="bg-base-100 border border-base-300 p-6 rounded-2xl space-y-4"
+			>
+				<div
+					class="flex justify-between items-center text-base-content/70"
+				>
+					<span class="text-xs font-bold uppercase tracking-wider"
+						>Bajo Stock (≤ 5)</span
+					>
+					<div
+						class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center"
+					>
+						<Icon name="lucide:alert-triangle" class="w-5 h-5" />
+					</div>
+				</div>
+				<div class="text-4xl font-black text-amber-600">
+					{lowStockProducts}
+				</div>
+				<p class="text-xs text-base-content/50 font-medium">
+					Requieren reposición urgente
+				</p>
+			</div>
+
+			<!-- Total Categories -->
+			<div
+				class="bg-base-100 border border-base-300 p-6 rounded-2xl space-y-4"
+			>
+				<div
+					class="flex justify-between items-center text-base-content/70"
+				>
+					<span class="text-xs font-bold uppercase tracking-wider"
+						>Categorías</span
+					>
+					<div
+						class="w-10 h-10 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center"
+					>
+						<Icon name="lucide:layers" class="w-5 h-5" />
+					</div>
+				</div>
+				<div class="text-4xl font-black text-purple-600">
+					{totalCategories}
+				</div>
+				<p class="text-xs text-base-content/50 font-medium">
+					Líneas de productos activas
+				</p>
+			</div>
+		</div>
+
+		<!-- Quick Actions & Recent Products -->
+		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+			<!-- Recent Products Table -->
+			<div
+				class="lg:col-span-2 bg-base-100 border border-base-300 rounded-3xl p-6 space-y-6"
+			>
+				<div class="flex justify-between items-center">
+					<h3
+						class="text-lg font-black uppercase text-base-content tracking-tight flex items-center gap-2"
+					>
+						<Icon
+							name="lucide:clock"
+							class="w-5 h-5 text-primary"
+						/>
+						Últimos Productos Agregados
+					</h3>
+					<a
+						href="/admin/productos"
+						class="text-xs font-bold text-primary hover:underline uppercase tracking-wider"
+					>
+						Ver Todos →
+					</a>
+				</div>
+
+				<div class="overflow-x-auto">
+					<table class="w-full text-left text-sm">
+						<thead
+							class="text-xs uppercase text-base-content/70 bg-base-200 border-b border-base-300"
+						>
+							<tr>
+								<th class="p-3">Producto</th>
+								<th class="p-3">Categoría</th>
+								<th class="p-3">Precio</th>
+								<th class="p-3">Stock</th>
+								<th class="p-3">Estado</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-base-300">
+							{
+								recentProducts.map((p) => (
+									<tr class="hover:bg-base-200/50 transition-colors">
+										<td class="p-3 flex items-center gap-3 font-bold text-base-content">
+											<img
+												src={
+													p.images[0]?.imageUrl ||
+													"https://via.placeholder.com/40"
+												}
+												alt={p.name}
+												class="w-10 h-10 object-cover rounded-lg bg-base-200 shrink-0"
+											/>
+											<span class="truncate max-w-[200px]">
+												{p.name}
+											</span>
+										</td>
+										<td class="p-3 text-base-content/70 text-xs font-medium">
+											{p.category?.name ||
+												"Sin categoría"}
+										</td>
+										<td class="p-3 text-emerald-600 font-black">
+											S/ {Number(p.price).toFixed(2)}
+										</td>
+										<td class="p-3">
+											<span
+												class={`badge text-xs font-bold border-none ${p.stock > 5 ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}
+											>
+												{p.stock} un.
+											</span>
+										</td>
+										<td class="p-3">
+											{p.isActive ? (
+												<span class="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300">
+													<span class="w-1.5 h-1.5 rounded-full bg-emerald-500" />{" "}
+													Activo
+												</span>
+											) : (
+												<span class="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-base-content/70 bg-base-200 px-2.5 py-1 rounded-full border border-base-300">
+													<span class="w-1.5 h-1.5 rounded-full bg-slate-500" />{" "}
+													Oculto
+												</span>
+											)}
+										</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- System Connection Info -->
+			<div
+				class="bg-base-100 border border-base-300 rounded-3xl p-6 space-y-6 flex flex-col justify-between"
+			>
+				<div class="space-y-4">
+					<h3
+						class="text-lg font-black uppercase text-base-content tracking-tight flex items-center gap-2"
+					>
+						<Icon
+							name="lucide:database"
+							class="w-5 h-5 text-indigo-600"
+						/>
+						Estado del Servidor
+					</h3>
+
+					<div class="space-y-3 text-xs">
+						<div
+							class="p-4 bg-base-200 rounded-xl border border-base-300 space-y-2"
+						>
+							<div
+								class="flex justify-between text-base-content/70 font-medium"
+							>
+								<span>Proveedor BD:</span>
+								<span class="font-bold text-base-content"
+									>MySQL (Hostinger)</span
+								>
+							</div>
+							<div
+								class="flex justify-between text-base-content/70 font-medium"
+							>
+								<span>ORM Engine:</span>
+								<span class="font-bold text-indigo-600"
+									>Prisma Client v6</span
+								>
+							</div>
+							<div
+								class="flex justify-between text-base-content/70 font-medium"
+							>
+								<span>Host Remote:</span>
+								<span class="font-bold text-emerald-600"
+									>srv2141.hstgr.io</span
+								>
+							</div>
+						</div>
+
+						<p class="text-base-content/70 leading-relaxed text-xs">
+							Para administrar los registros mediante interfaz
+							tabular avanzada, puedes ejecutar <code
+								class="text-primary bg-base-200 px-2 py-1 rounded font-mono text-[11px]"
+								>npm run db:studio</code
+							>.
+						</p>
+					</div>
+				</div>
+
+				<div class="pt-4 border-t border-base-300">
+					<a
+						href="/admin/productos"
+						class="w-full bg-base-200 hover:bg-base-300 text-base-content font-bold py-3.5 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-base-300 transition-colors"
+					>
+						<Icon
+							name="lucide:package-search"
+							class="w-4 h-4 text-primary"
+						/>
+						Ir al Gestor de Productos
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</AdminLayout>

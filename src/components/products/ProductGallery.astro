@@ -3,10 +3,9 @@ interface Props {
     images: string[];
 }
 
-const { images } = Astro.props;
-const mainImage =
-    images[0] ||
-    "https://images.unsplash.com/photo-1550985616-10810253b84d?q=80&w=2000&auto=format&fit=crop";
+const { images = [] } = Astro.props;
+const safeImages = Array.isArray(images) && images.length > 0 ? images : ["https://images.unsplash.com/photo-1550985616-10810253b84d?q=80&w=2000&auto=format&fit=crop"];
+const mainImage = safeImages[0];
 ---
 
 <div class="product-gallery space-y-6">
@@ -25,7 +24,7 @@ const mainImage =
     <!-- Thumbnails -->
     <div class="grid grid-cols-4 gap-4">
         {
-            images.map((img, index) => (
+            safeImages.map((img, index) => (
                 <button
                     class="cursor-pointer thumbnail-btn aspect-square rounded-2xl overflow-hidden border-2 transition-all p-1 bg-slate-50 border-slate-100"
                     data-image={img}

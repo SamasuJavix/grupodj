@@ -1,0 +1,423 @@
+---
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { Icon } from "astro-icon/components";
+import prisma from "../../../lib/prisma";
+
+export const prerender = false;
+
+// Consultar categorías desde Hostinger MySQL
+const categories = await prisma.category.findMany({ orderBy: { name: "asc" } });
+---
+
+<AdminLayout title="Crear Nuevo Producto | Admin Grupo DJ">
+	<div class="max-w-4xl mx-auto space-y-8">
+		<!-- Header -->
+		<div class="flex items-center justify-between bg-base-100 p-6 rounded-3xl border border-base-300">
+			<div>
+				<a href="/admin/productos" class="inline-flex items-center gap-2 text-xs text-base-content/70 hover:text-primary font-bold uppercase tracking-widest mb-2 transition-colors">
+					<Icon name="lucide:arrow-left" class="w-4 h-4" />
+					Volver a productos
+				</a>
+				<h2 class="text-2xl font-black uppercase text-base-content tracking-tight italic">Registrar Nuevo Producto</h2>
+			</div>
+		</div>
+
+		<!-- Main Form -->
+		<form id="create-product-form" class="space-y-8">
+			<!-- Section 1: Informaciones Principales -->
+			<div class="bg-base-100 p-8 rounded-3xl border border-base-300 space-y-6">
+				<h3 class="text-lg font-black uppercase text-base-content tracking-tight flex items-center gap-2 border-b border-base-300 pb-4">
+					<Icon name="lucide:info" class="w-5 h-5 text-primary" />
+					Información General
+				</h3>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">SKU / Código Unico *</label>
+						<input
+							type="text"
+							name="sku"
+							id="sku"
+							required
+							placeholder="ej. LAP-LEN-001"
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary font-mono"
+						/>
+					</div>
+
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Nombre del Producto *</label>
+						<input
+							type="text"
+							name="name"
+							id="name"
+							required
+							placeholder="ej. MacBook Pro 16 M3 Max"
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary"
+						/>
+					</div>
+
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Categoría *</label>
+						<select
+							name="categoryId"
+							required
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary"
+						>
+							<option value="">Seleccionar Categoría...</option>
+							{categories.map((c) => (
+								<option value={c.id}>{c.name}</option>
+							))}
+						</select>
+					</div>
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Marca</label>
+						<input
+							type="text"
+							name="brand"
+							placeholder="ej. Apple"
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary"
+						/>
+					</div>
+
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Insignia / Badge (Opcional)</label>
+						<select
+							name="badge"
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary"
+						>
+							<option value="">Sin Insignia</option>
+							<option value="Nuevo">Nuevo</option>
+							<option value="Más Vendido">Más Vendido</option>
+							<option value="Premium">Premium</option>
+							<option value="Oferta Especial">Oferta Especial</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="space-y-2">
+					<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Descripción Detallada</label>
+					<textarea
+						name="description"
+						rows="4"
+						placeholder="Escribe la descripción comercial del producto..."
+						class="w-full bg-base-100 border border-base-300 rounded-xl p-4 text-sm text-base-content focus:outline-none focus:border-primary"
+					></textarea>
+				</div>
+			</div>
+
+			<!-- Section 2: Precios e Inventario -->
+			<div class="bg-base-100 p-8 rounded-3xl border border-base-300 space-y-6">
+				<h3 class="text-lg font-black uppercase text-base-content tracking-tight flex items-center gap-2 border-b border-base-300 pb-4">
+					<Icon name="lucide:dollar-sign" class="w-5 h-5 text-emerald-400" />
+					Precios e Inventario
+				</h3>
+
+				<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Precio de Venta (S/) *</label>
+						<input
+							type="number"
+							step="0.01"
+							name="price"
+							required
+							placeholder="1499.00"
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-emerald-400 font-black focus:outline-none focus:border-primary"
+						/>
+					</div>
+
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Porcentaje Descuento (%)</label>
+						<input
+							type="number"
+							name="discountPercentage"
+							defaultValue="0"
+							placeholder="0"
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary"
+						/>
+					</div>
+
+					<div class="space-y-2">
+						<label class="text-xs font-bold text-base-content/80 uppercase tracking-wider block">Stock Disponible *</label>
+						<input
+							type="number"
+							name="stock"
+							required
+							defaultValue="10"
+							placeholder="10"
+							class="w-full bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content font-bold focus:outline-none focus:border-primary"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<!-- Section 3: Galería de Imágenes -->
+			<div class="bg-base-100 p-8 rounded-3xl border border-base-300 space-y-6">
+				<div class="flex justify-between items-center border-b border-base-300 pb-4">
+					<h3 class="text-lg font-black uppercase text-base-content tracking-tight flex items-center gap-2">
+						<Icon name="lucide:image" class="w-5 h-5 text-indigo-400" />
+						Imágenes del Producto (URLs)
+					</h3>
+					<button
+						type="button"
+						id="add-image-btn"
+						class="btn btn-xs btn-outline border-slate-700 text-base-content/80 hover:bg-slate-800 gap-1 rounded-lg"
+					>
+						<Icon name="lucide:plus" class="w-3.5 h-3.5" /> Agregar Otra Imagen
+					</button>
+				</div>
+
+				<div id="image-inputs-container" class="space-y-3">
+					<div class="flex items-center gap-3 image-row animate-fade-in">
+						<img
+							src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=800"
+							alt="Vista Previa"
+							class="w-10 h-10 object-cover rounded-xl bg-base-100 border border-base-300 shrink-0 img-preview"
+						/>
+						<input
+							type="text"
+							name="imageUrl"
+							required
+							placeholder="/images/products/foto.jpg o https://..."
+							class="flex-1 bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary image-url-input"
+						/>
+						<label class="btn btn-sm btn-outline border-slate-700 text-base-content/80 hover:bg-slate-800 gap-1.5 cursor-pointer shrink-0 font-bold upload-btn">
+							<Icon name="lucide:upload" class="w-4 h-4 text-primary" />
+							<span class="upload-text text-xs">Subir Local</span>
+							<input type="file" accept="image/*" class="hidden file-upload-input" />
+						</label>
+						<span class="text-xs font-bold text-primary bg-primary/10 px-3 py-2 rounded-xl uppercase shrink-0">Portada</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Section 4: Especificaciones Técnicas Dinámicas -->
+			<div class="bg-base-100 p-8 rounded-3xl border border-base-300 space-y-6">
+				<div class="flex justify-between items-center border-b border-base-300 pb-4">
+					<h3 class="text-lg font-black uppercase text-base-content tracking-tight flex items-center gap-2">
+						<Icon name="lucide:sliders" class="w-5 h-5 text-purple-400" />
+						Especificaciones Técnicas
+					</h3>
+					<button
+						type="button"
+						id="add-spec-btn"
+						class="btn btn-xs btn-outline border-slate-700 text-base-content/80 hover:bg-slate-800 gap-1 rounded-lg"
+					>
+						<Icon name="lucide:plus" class="w-3.5 h-3.5" /> Agregar Especificación
+					</button>
+				</div>
+
+				<div id="specs-inputs-container" class="space-y-3">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 spec-row">
+						<input
+							type="text"
+							placeholder="Característica (ej. Procesador)"
+							class="spec-label bg-base-100 border border-base-300 rounded-xl px-4 py-2.5 text-sm text-base-content focus:outline-none focus:border-primary"
+						/>
+						<input
+							type="text"
+							placeholder="Valor (ej. Apple M3 Max)"
+							class="spec-value bg-base-100 border border-base-300 rounded-xl px-4 py-2.5 text-sm text-base-content focus:outline-none focus:border-primary"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<!-- Form Actions -->
+			<div class="flex justify-end gap-4">
+				<a href="/admin/productos" class="btn btn-ghost text-base-content/70 hover:text-base-content uppercase font-bold text-xs">
+					Cancelar
+				</a>
+				<button
+					type="submit"
+					id="submit-product-btn"
+					class="bg-primary hover:bg-primary/90 text-base-content font-black py-4 px-10 rounded-xl uppercase tracking-widest text-xs shadow-lg shadow-primary/20 cursor-pointer"
+				>
+					Guardar en MySQL
+				</button>
+			</div>
+		</form>
+	</div>
+
+	<script>
+		import { toast } from "sonner";
+
+		// Lógica para subir imagen a /api/admin/upload
+		function attachFileUploadHandler(row: HTMLElement) {
+			const fileInput = row.querySelector(".file-upload-input") as HTMLInputElement;
+			const urlInput = row.querySelector(".image-url-input") as HTMLInputElement;
+			const previewImg = row.querySelector(".img-preview") as HTMLImageElement;
+			const uploadText = row.querySelector(".upload-text") as HTMLElement;
+
+			if (!fileInput || !urlInput) return;
+
+			// Actualizar vista previa cuando cambia la URL manualmente
+			urlInput.addEventListener("input", () => {
+				if (previewImg && urlInput.value) {
+					previewImg.src = urlInput.value;
+				}
+			});
+
+			fileInput.addEventListener("change", async () => {
+				const file = fileInput.files?.[0];
+				if (!file) return;
+
+				const formData = new FormData();
+				formData.append("file", file);
+
+				if (uploadText) uploadText.textContent = "Subiendo...";
+
+				try {
+					const response = await fetch("/api/admin/upload", {
+						method: "POST",
+						body: formData,
+					});
+
+					const data = await response.json();
+
+					if (response.ok && data.success) {
+						urlInput.value = data.url;
+						if (previewImg) previewImg.src = data.url;
+						toast.success("¡Imagen subida localmente!");
+					} else {
+						toast.error(data.message || "Error al subir la imagen");
+					}
+				} catch (err) {
+					console.error("Error al subir archivo:", err);
+					toast.error("Error de conexión al subir imagen");
+				} finally {
+					if (uploadText) uploadText.textContent = "Subir Local";
+				}
+			});
+		}
+
+		// Adjuntar a todas las filas de imágenes existentes
+		document.querySelectorAll(".image-row").forEach((row) => {
+			attachFileUploadHandler(row as HTMLElement);
+		});
+
+		// Agregar campo de imagen adicional
+		const addImgBtn = document.getElementById("add-image-btn");
+		const imgContainer = document.getElementById("image-inputs-container");
+
+		addImgBtn?.addEventListener("click", () => {
+			const div = document.createElement("div");
+			div.className = "flex items-center gap-3 image-row animate-fade-in";
+			div.innerHTML = `
+				<img
+					src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=800"
+					alt="Vista Previa"
+					class="w-10 h-10 object-cover rounded-xl bg-base-100 border border-base-300 shrink-0 img-preview"
+				/>
+				<input
+					type="text"
+					name="imageUrl"
+					placeholder="/images/products/foto.jpg o https://..."
+					class="flex-1 bg-base-100 border border-base-300 rounded-xl px-4 py-3 text-sm text-base-content focus:outline-none focus:border-primary image-url-input"
+				/>
+				<label class="btn btn-sm btn-outline border-slate-700 text-base-content/80 hover:bg-slate-800 gap-1.5 cursor-pointer shrink-0 font-bold upload-btn">
+					<svg class="w-4 h-4 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+					<span class="upload-text text-xs">Subir Local</span>
+					<input type="file" accept="image/*" class="hidden file-upload-input" />
+				</label>
+				<button type="button" class="btn btn-circle btn-sm btn-ghost text-red-400 remove-img-btn shrink-0">✕</button>
+			`;
+			imgContainer?.appendChild(div);
+
+			attachFileUploadHandler(div);
+
+			div.querySelector(".remove-img-btn")?.addEventListener("click", () => div.remove());
+		});
+
+		// Agregar especificación técnica adicional
+		const addSpecBtn = document.getElementById("add-spec-btn");
+		const specsContainer = document.getElementById("specs-inputs-container");
+
+		addSpecBtn?.addEventListener("click", () => {
+			const div = document.createElement("div");
+			div.className = "grid grid-cols-1 sm:grid-cols-2 gap-3 spec-row animate-fade-in";
+			div.innerHTML = `
+				<input
+					type="text"
+					placeholder="Característica (ej. Memoria RAM)"
+					class="spec-label bg-base-100 border border-base-300 rounded-xl px-4 py-2.5 text-sm text-base-content focus:outline-none focus:border-primary"
+				/>
+				<div class="flex items-center gap-2">
+					<input
+						type="text"
+						placeholder="Valor (ej. 32GB)"
+						class="spec-value flex-1 bg-base-100 border border-base-300 rounded-xl px-4 py-2.5 text-sm text-base-content focus:outline-none focus:border-primary"
+					/>
+					<button type="button" class="btn btn-circle btn-sm btn-ghost text-red-400 remove-spec-btn">✕</button>
+				</div>
+			`;
+			specsContainer?.appendChild(div);
+			div.querySelector(".remove-spec-btn")?.addEventListener("click", () => div.remove());
+		});
+
+		// Enviar formulario a la API
+		const form = document.getElementById("create-product-form") as HTMLFormElement;
+		form?.addEventListener("submit", async (e) => {
+			e.preventDefault();
+
+			const formData = new FormData(form);
+			const name = formData.get("name") as string;
+			const sku = formData.get("sku") as string;
+			const categoryId = formData.get("categoryId") as string;
+			const brand = formData.get("brand") as string;
+			const badge = formData.get("badge") as string;
+			const description = formData.get("description") as string;
+			const price = formData.get("price") as string;
+			const discountPercentage = formData.get("discountPercentage") as string;
+			const stock = formData.get("stock") as string;
+
+			// Recolectar imágenes
+			const imageInputs = form.querySelectorAll('input[name="imageUrl"]') as NodeListOf<HTMLInputElement>;
+			const images = Array.from(imageInputs).map((input) => input.value.trim()).filter((url) => url.length > 0);
+
+			// Recolectar especificaciones
+			const specRows = form.querySelectorAll(".spec-row");
+			const specs: { label: string; value: string }[] = [];
+			specRows.forEach((row) => {
+				const labelInput = row.querySelector(".spec-label") as HTMLInputElement;
+				const valueInput = row.querySelector(".spec-value") as HTMLInputElement;
+				if (labelInput?.value && valueInput?.value) {
+					specs.push({ label: labelInput.value.trim(), value: valueInput.value.trim() });
+				}
+			});
+
+			try {
+				const response = await fetch("/api/admin/products", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						sku,
+						name,
+						categoryId,
+						brand,
+						badge,
+						description,
+						price,
+						discountPercentage,
+						stock,
+						images,
+						specs,
+					}),
+				});
+
+				const data = await response.json();
+
+				if (response.ok && data.success) {
+					toast.success("¡Producto registrado en MySQL!");
+					setTimeout(() => {
+						window.location.href = "/admin/productos";
+					}, 800);
+				} else {
+					toast.error(data.message || "Error al registrar el producto");
+				}
+			} catch (error) {
+				console.error("Error al enviar producto:", error);
+				toast.error("Error de conexión con el servidor");
+			}
+		});
+	</script>
+</AdminLayout>

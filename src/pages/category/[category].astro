@@ -3,11 +3,11 @@ import Layout from "../../layouts/Layout.astro";
 import CategoriesHeader from "../../components/categories/CategoriesHeader.astro";
 import Breadcrumbs from "../../components/ui/Breadcrumbs.astro";
 import CardProduct from "../../components/products/CardProduct.astro";
-import { products } from "../../data/products";
+import { getAllProducts } from "../../lib/db";
 import { categories } from "../../data/home";
 
 export async function getStaticPaths() {
-    // Get unique categories from products
+    const products = await getAllProducts();
     const uniqueCategories = [...new Set(products.map((p) => p.category))];
 
     return uniqueCategories.map((category) => {
@@ -20,7 +20,7 @@ export async function getStaticPaths() {
             props: {
                 categoryName: category,
                 categoryProducts: products.filter(
-                    (p) => p.category === category,
+                    (p) => p.category.toLowerCase() === category.toLowerCase(),
                 ),
                 image: categoryData?.image,
             },
@@ -28,13 +28,31 @@ export async function getStaticPaths() {
     });
 }
 
-const { categoryName, categoryProducts, image } = Astro.props;
+let { categoryName, categoryProducts, image } = Astro.props;
+const categorySlug = Astro.params.category || "";
 
-const breadcrumbItems = [{ label: "Pagina principal", href: "/" }, { label: categoryName }];
+// Si la ruta se ejecuta mediante SSR en servidor, consultamos la BD en tiempo real
+if (!categoryProducts || !Array.isArray(categoryProducts)) {
+    const allProducts = await getAllProducts();
+    categoryProducts = allProducts.filter(
+        (p) => p.category.toLowerCase() === categorySlug.toLowerCase()
+    );
+    if (categoryProducts.length > 0) {
+        categoryName = categoryProducts[0].category;
+    } else {
+        categoryName = categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1);
+    }
+    const categoryData = categories.find(
+        (c) => c.name.toLowerCase() === categorySlug.toLowerCase()
+    );
+    image = categoryData?.image;
+}
+
+const breadcrumbItems = [{ label: "Pagina principal", href: "/" }, { label: categoryName || categorySlug }];
 ---
 
-<Layout title={`${categoryName} | E-COMMER`}>
-    <CategoriesHeader title={categoryName} image={image} />
+<Layout title={`${categoryName || categorySlug} | DJ TEC`}>
+    <CategoriesHeader title={categoryName || categorySlug} image={image} />
 
     <div class="bg-white min-h-screen pb-20 pt-10">
         <div class="max-w-7xl mx-auto px-6">
@@ -48,7 +66,7 @@ const breadcrumbItems = [{ label: "Pagina principal", href: "/" }, { label: cate
                     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 animate-fade-in"
                 >
                     {
-                        categoryProducts.map((product) => (
+                        categoryProducts && categoryProducts.map((product) => (
                             <div
                                 class="product-item transition-all duration-300"
                                 data-subcategory={
@@ -56,9 +74,9 @@ const breadcrumbItems = [{ label: "Pagina principal", href: "/" }, { label: cate
                                 }
                             >
                                 <CardProduct
-                                    title={product.title}
+                                    title={product.name || product.title}
                                     price={product.price}
-                                    images={product.images}
+                                    images={product.images || []}
                                     stock={product.stock}
                                     slug={product.slug}
                                 />

@@ -7,7 +7,7 @@ interface Props {
 
 const { currentPage, totalPages, baseUrl } = Astro.props;
 
-const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+const pages = Array.from({ length: Math.max(0, totalPages || 0) }, (_, i) => i + 1);
 ---
 
 {/* Pagination Component */}

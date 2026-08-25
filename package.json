@@ -6,7 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "db:generate": "npx prisma generate",
+    "db:push": "npx prisma db push",
+    "db:studio": "npx prisma studio",
+    "db:seed": "npx tsx src/scripts/seed.ts"
   },
   "dependencies": {
     "@astrojs/react": "4.2.0",
@@ -15,11 +19,14 @@
     "@iconify-json/mdi": "^1.2.3",
     "@nanostores/persistent": "^1.2.0",
     "@nanostores/react": "^1.0.0",
+    "@prisma/client": "^6.4.1",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "astro": "^6.0.5",
     "astro-icon": "^1.1.5",
+    "bcryptjs": "^3.0.2",
+    "jsonwebtoken": "^9.0.2",
     "nanostores": "^1.1.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -28,6 +35,10 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "daisyui": "^5.5.14"
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.9",
+    "daisyui": "^5.5.14",
+    "prisma": "^6.4.1",
+    "tsx": "^4.19.3"
   }
 }

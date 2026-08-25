@@ -9,7 +9,8 @@ interface Props {
     slug: string;
 }
 
-const { title, price, images, stock, slug } = Astro.props;
+const { title, price, images = [], stock, slug } = Astro.props;
+const productImages = Array.isArray(images) && images.length > 0 ? images : ["https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=800"];
 ---
 
 <div
@@ -26,7 +27,7 @@ const { title, price, images, stock, slug } = Astro.props;
                 id: slug,
                 name: title,
                 price: price,
-                image: images[0] || "",
+                image: productImages[0] || "",
                 stock: stock,
                 slug: slug,
             })}
@@ -43,7 +44,7 @@ const { title, price, images, stock, slug } = Astro.props;
                 id: slug,
                 name: title,
                 price: price,
-                image: images[0] || "",
+                image: productImages[0] || "",
                 stock: stock,
             })}
         >
@@ -58,7 +59,7 @@ const { title, price, images, stock, slug } = Astro.props;
         <div class="swiper product-swiper w-full h-full">
             <div class="swiper-wrapper">
                 {
-                    images.map((img) => (
+                    productImages.map((img) => (
                         <div class="swiper-slide">
                             <img
                                 src={img}

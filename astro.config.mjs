@@ -18,6 +18,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  output: 'static', // Habilita el renderizado en el servidor
+  output: 'server', // Habilita renderizado dinámico en servidor y endpoints API con adaptador Vercel
   adapter: vercel(),
 });
