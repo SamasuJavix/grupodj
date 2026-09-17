@@ -11,7 +11,7 @@ Plataforma de comercio electrónico moderna, rápida y adaptable construida con 
 - [Estructura del Proyecto](#-estructura-del-proyecto)
 - [Instalación y Configuración](#-instalación-y-configuración)
 - [Scripts Disponibles](#-scripts-disponibles)
-- [Despliegue](#-despliegue)
+- [Despliegue y Optimización en Hostinger (NPROC y Prisma)](#-despliegue-y-optimización-en-hostinger-nproc-y-prisma)
 - [Puntos de Mejora y Estado del Proyecto](#-puntos-de-mejora-y-estado-del-proyecto)
 
 ---
@@ -108,12 +108,35 @@ grupodj/
 
 ---
 
-## ☁️ Despliegue
+## ☁️ Despliegue y Optimización en Hostinger (NPROC y Prisma)
 
-El proyecto está configurado para desplegarse fácilmente en **Vercel** utilizando `@astrojs/vercel`.
+El proyecto está configurado para ejecutarse en modo SSR sobre **Hostinger Business** utilizando el adaptador `@astrojs/node` en modo `standalone` con el punto de entrada [server.js](file:///C:/Users/Javier/Downloads/PROYECTOS%20TRABAJO/GRUPO%20DJ/PAGINA/grupodj-ultimo/grupodj/server.js).
 
-1. Conecta el repositorio de GitHub con tu cuenta de Vercel.
-2. Vercel detectará automáticamente Astro y aplicará las configuraciones de build (`npm run build`).
+### ⚙️ Configuración en hPanel (Hostinger Node.js)
+1. **Punto de inicio (Startup file):** `server.js`
+2. **Directorio raíz de la aplicación:** Raíz del repositorio donde se encuentra `package.json`.
+3. **Versión de Node.js:** Node.js 20.x o superior.
+4. **Comando de compilación:** `npm run build`
+
+### 🛡️ Mitigación de Límites de Recursos (NPROC en CloudLinux)
+Los planes compartidos de Hostinger aplican una jaula de recursos (CloudLinux LVE) con un límite estricto de **120 procesos/hilos (NPROC)**. Para evitar pánicos del motor de consultas de Prisma (`Query engine exited with code 101 / timer has gone away`) y la acumulación de workers:
+
+1. **Restricción de Hilos de Prisma y Tokio:**
+   Se fija la concurrencia a 1 hilo de trabajo por worker mediante las variables:
+   ```env
+   PRISMA_QUERY_ENGINE_NUM_THREADS=1
+   TOKIO_WORKER_THREADS=1
+   ```
+   (Inyectadas en `server.js`, `src/lib/prisma.ts` y `.env`).
+
+2. **Límite en el Connection Pool de MySQL:**
+   En la cadena `DATABASE_URL`, se limita el pool a un máximo de 3 conexiones con timeout de 10s:
+   ```env
+   DATABASE_URL="mysql://usuario:password@localhost:3306/nombre_db?connection_limit=3&pool_timeout=10"
+   ```
+
+3. **Instancia Singleton de Prisma Blindada:**
+   En [src/lib/prisma.ts](file:///C:/Users/Javier/Downloads/PROYECTOS%20TRABAJO/GRUPO%20DJ/PAGINA/grupodj-ultimo/grupodj/src/lib/prisma.ts), se garantiza la persistencia en `globalThis` tanto en desarrollo como en producción para evitar la duplicación del motor binario entre chunks de Astro.
 
 ---
 
